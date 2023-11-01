@@ -1,6 +1,6 @@
 # Guess The Number 🎮
 
-Created in **NextJs** by
+Created using **NextJs 14** by
 
 - [@BidyutKrDas](https://github.com/Bidyut-Kr-Das)
 
