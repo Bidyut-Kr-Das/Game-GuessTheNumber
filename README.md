@@ -1,6 +1,8 @@
 # Guess The Number 🎮
 
-Created in **NextJs** by
+> This is a number guessing game
+
+Created using **NextJs 14** by
 
 - [@BidyutKrDas](https://github.com/Bidyut-Kr-Das)
 
