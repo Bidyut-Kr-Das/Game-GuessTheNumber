@@ -31,16 +31,6 @@ export default function Home() {
     chooseTheNumber();
   }, []);
 
-  // useEffect(() => {
-  //   if (currentGame.score <= 0) {
-  //     setCurrentGame({
-  //       ...currentGame,
-  //       lose: false,
-  //       prompt: "Click The replay button above",
-  //     });
-  //   }
-  // }, [currentGame.score]);
-
   // Restart button function
   //randomise the number again and set all state to default;
   const chooseTheNumber = () => {
@@ -61,21 +51,34 @@ export default function Home() {
   //false:reduce score by 1
   //true: win the game
   const validateNumber = (data: string) => {
-    if (Number(data) > randomNumber) {
-      setCurrentGame({
-        ...currentGame,
-        prompt: "Guess lower...",
-        score: currentGame.score - 1,
-      });
-    } else if (Number(data) < randomNumber) {
-      setCurrentGame({
-        ...currentGame,
-        prompt: "Guess higher...",
-        score: currentGame.score - 1,
-      });
+    if (currentGame.score > 1) {
+      if (Number(data) > randomNumber) {
+        setCurrentGame({
+          ...currentGame,
+          prompt: "Guess lower...",
+          score: currentGame.score - 1,
+        });
+      } else if (Number(data) < randomNumber) {
+        setCurrentGame({
+          ...currentGame,
+          prompt: "Guess higher...",
+          score: currentGame.score - 1,
+        });
+      } else {
+        setCurrentGame({
+          ...currentGame,
+          win: true,
+          prompt: "🎉 Congratulation 🎉",
+        });
+        setNumber(randomNumber);
+      }
     } else {
-      setCurrentGame({ ...currentGame, win: true, prompt: "Congratulation." });
-      setNumber(randomNumber);
+      setCurrentGame({
+        ...currentGame,
+        score: 0,
+        lose: true,
+        prompt: "You lost! Click the replay button",
+      });
     }
   };
 
@@ -83,7 +86,7 @@ export default function Home() {
     <main
       className={`${
         currentGame.win ? "bg-green-500" : "bg-slate-900"
-      } h-screen w-screen  p-8`}
+      } h-screen w-screen  p-8 transition-colors duration-1000 select-none`}
     >
       {/* title Area */}
       <header
@@ -95,7 +98,7 @@ export default function Home() {
       {/* 2nd row replay button and text */}
       <section className="flex justify-between my-4">
         <button
-          className={` py-2 px-4 bg-white tracking-wider text-xl font-medium`}
+          className={`text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:outline-none font-medium rounded-lg  px-5 py-2.5 text-center  mb-2 text-xl tracking-wider`}
           onClick={chooseTheNumber}
         >
           Replay!
@@ -116,7 +119,7 @@ export default function Home() {
         <span className="absolute w-screen bg-white h-1 z-0"></span>
       </section>
 
-      <section className="flex w-full justify-center gap-40 px-40 py-8">
+      <section className="flex w-full justify-evenly gap-40 px-40 py-8">
         <Gamingboard tempNumber={validateNumber} result={currentGame} />
         <Scoreboard
           currentCondition={currentGame.prompt}

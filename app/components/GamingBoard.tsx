@@ -24,13 +24,13 @@ const Gamingboard = (props: any) => {
           type="number"
           value={number}
           onChange={(e) => setNumber(e.target.value)}
-          className="h-32 w-32 text-center text-5xl"
+          className="h-32 w-32 text-center text-5xl outline-none border-none rounded-xl"
         />
         {}
         <input
           type="submit"
-          value="Check"
-          className={` bg-white h-16 w-48 border-4 text-black/80 border-black/80 cursor-pointer text-2xl font-medium tracking-widest`}
+          value="Check ?"
+          className={`text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-xl px-5 py-2.5 text-center  mb-2 w-32 cursor-pointer`}
         />
       </form>
     </>
